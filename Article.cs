@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POS
 {
-    public class Article
+    public class Article : INotifyPropertyChanged
     {
         private string _index;
         public string Index
@@ -55,7 +56,10 @@ namespace POS
             set
             {
                 _tax = value;
+                
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
