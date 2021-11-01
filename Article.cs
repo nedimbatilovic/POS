@@ -16,9 +16,18 @@ namespace POS
             set
             {
                 _index = value;
+                Change("Index");
             }
         }
-        public string Name { get; set; }
+        public string _name;
+        public string Name {
+            get => _name;
+            set
+            {
+                _name = value;
+                Change("Name");
+            }
+        }
 
         private decimal _entryPrice;
         public decimal EntryPrice {
@@ -26,6 +35,7 @@ namespace POS
             set
             {
                 _entryPrice = value;
+                Change("EntryPrice");
             }
         }
 
@@ -36,6 +46,8 @@ namespace POS
             {
                 _outputPrice = value;
                 _margin = (int)(100 * (_outputPrice / _entryPrice - 1));
+                Change("OutputPrice");
+                Change("Margin");
             }
         }
 
@@ -46,20 +58,32 @@ namespace POS
             {
                 _margin = value;
                 _outputPrice = 100 * (1 + Margin / 100);
+                Change("Margin");
+                Change("OutputPrice");
             } 
         }
 
-        private int _tax;
-        public int Tax
+        private decimal _tax;
+        public decimal Tax
         {
             get => _tax;
             set
             {
                 _tax = value;
-                
+                Change("Tax");
             }
         }
-
+        private int _taxRate;
+        private int TaxRate
+        {
+            get => _taxRate;
+            set
+            {
+                _taxRate = value;
+                Change("TaxRate");
+            }
+        }
+        private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
