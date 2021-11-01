@@ -15,19 +15,19 @@
                 <Label Width="220" FontSize="13">Add Article</Label>
 
                 <Label Width="220">Index</Label>
-                <TextBox Width="190"/>
+                <TextBox Width="190" Text="{Binding Path=Index}"/>
 
                 <Label Width="220">Article Name</Label>
                 <TextBox Width="190" Text="{Binding Path=Name}"/>
 
                 <Label Width="220">Entry Price</Label>
-                <TextBox Width="190"/>
+                <TextBox Width="190" Text="{Binding Path=EntryPrice}"/>
 
                 <Label Width="220">Output Price</Label>
-                <TextBox Width="190"/>
+                <TextBox Width="190" Text="{Binding Path=OutputPrice}"/>
 
                 <Label Width="220">Margin</Label>
-                <TextBox Width="190"/>
+                <TextBox Width="190" Text="{Binding Path=Margin}"/>
 
                 <Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
             </StackPanel>
