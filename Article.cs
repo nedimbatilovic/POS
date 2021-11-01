@@ -20,7 +20,13 @@ namespace POS
         public string Name { get; set; }
 
         private decimal _entryPrice;
-        public decimal EntryPrice { get; set; }
+        public decimal EntryPrice {
+            get => _entryPrice; 
+            set
+            {
+                _entryPrice = value;
+            }
+        }
 
         private decimal _outputPrice;
         public decimal OutputPrice {
