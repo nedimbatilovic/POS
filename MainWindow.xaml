@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <DataGrid DockPanel.Dock="Left" Width="548" ColumnWidth="90" Name="ArticleDisplay" IsReadOnly="True"/>
+        <DataGrid DockPanel.Dock="Left" Width="548" ColumnWidth="*" Name="ArticleDisplay" IsReadOnly="True"/>
         <Border BorderBrush="Gray"
                 BorderThickness="2"
                 Margin="10">
@@ -29,11 +29,13 @@
                 <Label Width="220">Margin</Label>
                 <TextBox Width="190" Text="{Binding Path=Margin, UpdateSourceTrigger=PropertyChanged}"/>
 
+                <Label Width="220">Output Price w/Tax</Label>
+                <TextBox Width="190" Text="{Binding Path=OutputPriceTax, UpdateSourceTrigger=PropertyChanged}"/>
+
                 <Label Width="220">Tax Rate</Label>
                 <TextBox Width="190" Text="{Binding Path=TaxRate, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Width="220">Tax</Label>
-                <TextBox Width="190" Text="{Binding Path=Tax, UpdateSourceTrigger=PropertyChanged}"/>
+                
 
                 <Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
             </StackPanel>

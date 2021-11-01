@@ -57,30 +57,32 @@ namespace POS
             set
             {
                 _margin = value;
-                _outputPrice = 100 * (1 + Margin / 100);
+                _outputPrice = (decimal)(100 * (1 + _margin / 100.0));
                 Change("Margin");
                 Change("OutputPrice");
             } 
         }
 
-        private decimal _tax;
-        public decimal Tax
+        private decimal _outputPriceTax;
+        public decimal OutputPriceTax
         {
-            get => _tax;
+            get => _outputPriceTax;
             set
             {
-                _tax = value;
-                Change("Tax");
+                _outputPriceTax = value;
+                Change("OutputPriceTax");
             }
         }
         private int _taxRate;
-        private int TaxRate
+        public int TaxRate
         {
             get => _taxRate;
             set
             {
                 _taxRate = value;
+                _outputPriceTax = _outputPrice * (decimal)(1 + _taxRate / 100.0);
                 Change("TaxRate");
+                Change("OutputPriceTax");
             }
         }
         private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
