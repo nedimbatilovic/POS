@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,13 +94,8 @@ namespace POS
 
         public string Error
         {
-            get
-            {
-                var Errs = _validator.Validate(this);
-                string Err = string.Empty;
-                Errs.Errors.ForEach(e => Err += e.ErrorMessage + Environment.NewLine);
-                return Err;
-            }
+            get => _validator.Validate(this).Errors.Aggregate(string.Empty, (Errs, Err)
+                => Errs += Err + Environment.NewLine);
         }
         private ArticleValidator _validator = new();
         public string this[string propertyName]
@@ -121,6 +117,7 @@ namespace POS
         public ArticleValidator()
         {
             RuleFor(a => a.Name).NotEmpty().WithMessage("Article name cannot be empty.");
+
         } 
 
     } 

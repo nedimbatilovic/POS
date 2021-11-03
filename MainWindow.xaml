@@ -14,17 +14,17 @@
             <StackPanel Width="220" Name="spArticleAddition">
                 <Label Width="220" FontSize="13">Add Article</Label>
 
-                <Label Width="220">Index</Label>
-                <TextBox Width="190" Text="{Binding Path=Index, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Width="220">Article Index</Label>
+                <TextBox Width="190" Text="{Binding Path=Index, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Width="220">Article Name</Label>
-                <TextBox Width="190" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="190" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Width="220">Entry Price</Label>
-                <TextBox Width="190" Text="{Binding Path=EntryPrice, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="190" Text="{Binding Path=EntryPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Width="220">Output Price</Label>
-                <TextBox Width="190" Text="{Binding Path=OutputPrice, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="190" Text="{Binding Path=OutputPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Width="220">Margin</Label>
                 <TextBox Width="190" Text="{Binding Path=Margin, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
