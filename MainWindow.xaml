@@ -27,15 +27,13 @@
                 <TextBox Width="190" Text="{Binding Path=OutputPrice, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Width="220">Margin</Label>
-                <TextBox Width="190" Text="{Binding Path=Margin, UpdateSourceTrigger=PropertyChanged}"/>
-
-                <Label Width="220">Output Price w/Tax</Label>
-                <TextBox Width="190" Text="{Binding Path=OutputPriceTax, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="190" Text="{Binding Path=Margin, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Label Width="220">Tax Rate</Label>
-                <TextBox Width="190" Text="{Binding Path=TaxRate, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="190" Text="{Binding Path=TaxRate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
-                
+                <Label Width="220">Output Price w/Tax</Label>
+                <TextBox Width="190" Text="{Binding Path=OutputPriceTax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                 <Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
             </StackPanel>

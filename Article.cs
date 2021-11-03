@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace POS
 {
-    public class Article : INotifyPropertyChanged
+    public class Article : INotifyPropertyChanged, IDataErrorInfo
     {
         private string _index;
         public string Index
@@ -63,16 +64,6 @@ namespace POS
             } 
         }
 
-        private decimal _outputPriceTax;
-        public decimal OutputPriceTax
-        {
-            get => _outputPriceTax;
-            set
-            {
-                _outputPriceTax = value;
-                Change("OutputPriceTax");
-            }
-        }
         private int _taxRate;
         public int TaxRate
         {
@@ -85,7 +76,52 @@ namespace POS
                 Change("OutputPriceTax");
             }
         }
-        private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+
+        private decimal _outputPriceTax;
+        public decimal OutputPriceTax
+        {
+            get => _outputPriceTax;
+            set
+            {
+                _outputPriceTax = value;
+                Change("OutputPriceTax");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
+        private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+
+        public string Error
+        {
+            get
+            {
+                var Errs = _validator.Validate(this);
+                string Err = string.Empty;
+                Errs.Errors.ForEach(e => Err += e.ErrorMessage + Environment.NewLine);
+                return Err;
+            }
+        }
+        private ArticleValidator _validator = new();
+        public string this[string propertyName]
+        {
+            get
+            {
+                var Errs = _validator.Validate(this);
+                var Err = Errs.Errors.Where(err => err.PropertyName == propertyName).FirstOrDefault();
+
+                if (Err != null)
+                    return Err.ErrorMessage;
+                return string.Empty;
+            }
+        }
+      
     }
+    public class ArticleValidator : AbstractValidator<Article>
+    {
+        public ArticleValidator()
+        {
+            RuleFor(a => a.Name).NotEmpty().WithMessage("Article name cannot be empty.");
+        } 
+
+    } 
 }
