@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:POS"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="TextBox">
+            
+        </Style>
     </Application.Resources>
 </Application>

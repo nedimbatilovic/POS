@@ -116,9 +116,13 @@ namespace POS
     {
         public ArticleValidator()
         {
-            RuleFor(a => a.Name).NotEmpty().WithMessage("Article name cannot be empty.");
+            RuleFor(a => a.Name)
+                .NotEmpty().WithMessage("Article name cannot be empty.")
+                .MinimumLength(3).WithMessage("Article name cannot be shorter than 3 characters.")
+                .MaximumLength(150).WithMessage("Article name cannot be longer than 150 characters.")
+                ;
 
-        } 
+        }
 
     } 
 }
