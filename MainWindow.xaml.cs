@@ -32,7 +32,7 @@ namespace POS
             /*File.WriteAllText("test.txt", "stvari");
             string jhg = "hghg" + Environment.NewLine;
             string nesto = File.ReadAllText("test.txt");*/
-              
+            
         }
 
         private void ArticleAddition(object sender, RoutedEventArgs e)

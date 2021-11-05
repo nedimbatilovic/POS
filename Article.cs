@@ -21,6 +21,7 @@ namespace POS
                 Change("Index");
             }
         }
+
         public string _name;
         public string Name {
             get => _name;
@@ -33,7 +34,7 @@ namespace POS
 
         private decimal _entryPrice;
         public decimal EntryPrice {
-            get => _entryPrice; 
+            get => _entryPrice;
             set
             {
                 _entryPrice = value;
@@ -62,7 +63,7 @@ namespace POS
                 _outputPrice = (decimal)(100 * (1 + _margin / 100.0));
                 Change("Margin");
                 Change("OutputPrice");
-            } 
+            }
         }
 
         private int _taxRate;
@@ -103,6 +104,7 @@ namespace POS
             get
             {
                 var Errs = _validator.Validate(this);
+                Console.WriteLine(Errs);
                 var Err = Errs.Errors.Where(err => err.PropertyName == propertyName).FirstOrDefault();
 
                 if (Err != null)
@@ -110,18 +112,23 @@ namespace POS
                 return string.Empty;
             }
         }
-      
     }
     public class ArticleValidator : AbstractValidator<Article>
     {
         public ArticleValidator()
         {
+            RuleFor(a => a.Index)
+                .NotEmpty().WithMessage("Article Index cannot be empty.")
+                .MinimumLength(5).WithMessage("Article Index cannot be shorter than 5 characters.")
+                .MaximumLength(15).WithMessage("Article Index cannot be longer than 15 characters.");
+            
             RuleFor(a => a.Name)
                 .NotEmpty().WithMessage("Article name cannot be empty.")
                 .MinimumLength(3).WithMessage("Article name cannot be shorter than 3 characters.")
-                .MaximumLength(150).WithMessage("Article name cannot be longer than 150 characters.")
-                ;
+                .MaximumLength(50).WithMessage("Article name cannot be longer than 50 characters.");
 
+            RuleFor(a => a.EntryPrice);
+            RuleFor(a => a.OutputPrice);
         }
 
     } 

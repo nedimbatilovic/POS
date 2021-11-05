@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:POS"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <DockPanel>
-        <DataGrid DockPanel.Dock="Left" Width="548" ColumnWidth="*" Name="ArticleDisplay" IsReadOnly="True"/>
-        <Border BorderBrush="Gray"
+        <Border DockPanel.Dock="Left"
+                BorderBrush="Gray"
                 BorderThickness="2"
                 Margin="10">
-            <StackPanel Width="220" Name="spArticleAddition">
+            <StackPanel Name="spArticleAddition">
                 <Label Width="220" FontSize="13">Add Article</Label>
 
                 <Label Width="220">Article Index</Label>
@@ -38,6 +39,17 @@
                 <Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
             </StackPanel>
         </Border>
+        
+        <DataGrid AutoGenerateColumns="False" ColumnWidth="*" Name="ArticleDisplay" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Index" Binding="{Binding Path=Index}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Entry Price" Binding="{Binding Path=EntryPrice}"/>
+                <DataGridTextColumn Header="Output Price" Binding="{Binding Path=OutputPrice}"/>
+                <DataGridTextColumn Header="Margin" Binding="{Binding Path=Margin}"/>
+                <DataGridTextColumn Header="Tax Rate" Binding="{Binding Path=TaxRate}"/>
+                <DataGridTextColumn Header="Output Price + Tax" Binding="{Binding Path=OutputPriceTax}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </DockPanel>
-
 </Window>
