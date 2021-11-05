@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POS
 {
-    public class Bill
+    public class Bill : INotifyPropertyChanged
     {
         private string _billIndex;
         public string BillIndex
@@ -15,7 +16,37 @@ namespace POS
             set
             {
                 _billIndex = value;
+                Change("BillIndex");
             }
         }
+
+        private int _saleTime;
+
+        public int SaleTime
+        {
+            get => _saleTime;
+            set
+            {
+                _saleTime = value;
+                Change("SaleTime");
+            }
+        }
+
+        public decimal Total
+        {
+            get
+            {
+                ArticleList.Aggregate<decimal, KeyValuePair<Article, int>>(0, (tot, pair));
+            }
+        }
+
+        public Dictionary<Article, int> ArticleList
+        {
+            get;
+            set;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
     }
 }
