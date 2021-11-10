@@ -16,12 +16,12 @@
                 Margin="5">
 					<StackPanel>
 						<Label>Article Index</Label>
-						<TextBox Text="{Binding Path=UIIndex}"></TextBox>
+						<TextBox Text="{Binding Path=UIIndex, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
 						<Label>Article Quantity</Label>
-						<TextBox Text="{Binding Path=UIQuantity}"></TextBox>
+						<TextBox Text="{Binding Path=UIQuantity, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-						<Button Click="BArticleAdditon">Add</Button>
+						<Button Click="BillArticleAdditon">Add</Button>
 
 						<Button Click="BillPush">Push</Button>
 					</StackPanel>

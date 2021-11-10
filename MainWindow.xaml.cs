@@ -24,14 +24,32 @@ namespace POS
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 
         public ObservableCollection<Article> ArticleList = new();
 
         public ObservableCollection<Bill> BillList = new();
         public Bill Bill = new();
 
-		public string UIIndex { get; set; }
-        public int UIQuantity { get; set; }
+        private string _uIIndex;
+		public string UIIndex { 
+            get =>_uIIndex; 
+            set
+            {
+                _uIIndex = value;
+                Change("UIIndex");
+            } 
+        }
+
+        private int _uIQuantity;
+        public int UIQuantity { 
+            get => _uIQuantity; 
+            set
+            {
+                _uIQuantity = value;
+                Change(UIIndex);
+            } 
+        }
 
         public MainWindow()
         {
@@ -39,11 +57,11 @@ namespace POS
 
             ArticlesTab.DataContext = new Article();
             ArticleDisplay.ItemsSource = ArticleList;
-            ArticleList.Add(new Article { Name="Voda", EntryPrice=10});
+            ArticleList.Add(new Article { Index="vodavoda", Name="Voda", EntryPrice=10, Quantity=10});
 
             BillTab.DataContext = this;
             BillDisplay.ItemsSource = Bill.BillArticleList;
-            Bill.BillArticleList.Add(new Article { Index="aaaaaaa"}, 10); // int is quantity
+            Bill.BillArticleList.Add(new Article { Index="vodavoda"}, 2); // int is quantity
 
             /*File.WriteAllText("test.txt", "stvari");
             string jhg = "hghg" + Environment.NewLine;
@@ -57,7 +75,7 @@ namespace POS
             ArticlesTab.DataContext = new Article();
         }
 
-        private void BArticleAdditon(object sender, RoutedEventArgs e)
+        private void BillArticleAdditon(object sender, RoutedEventArgs e)
         {      
             var art = ArticleList.Where(a => a.Index == UIIndex).FirstOrDefault();
             if  (art is null)
@@ -69,6 +87,9 @@ namespace POS
             if (art.Quantity >= UIQuantity) 
             {
                 Bill.BillArticleList.Add(art, UIQuantity);
+            } else
+            {
+                MessageBox.Show("Article Quantity Error");
             }
 		}
 

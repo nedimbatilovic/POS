@@ -21,7 +21,6 @@ namespace POS
         }
 
         private DateTime _saleTime;
-
         public DateTime SaleTime
         {
             get => _saleTime;

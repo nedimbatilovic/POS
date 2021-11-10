@@ -104,12 +104,12 @@ namespace POS
         public event PropertyChangedEventHandler PropertyChanged;
         private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 
+        private ArticleValidator _validator = new();
         public string Error
         {
             get => _validator.Validate(this).Errors.Aggregate(string.Empty, (Errs, Err)
                 => Errs += Err + Environment.NewLine);
         }
-        private ArticleValidator _validator = new();
         public string this[string propertyName]
         {
             get
