@@ -34,10 +34,7 @@ namespace POS
 
         public decimal Total
         {
-            get
-            {
-                ArticleList.Aggregate<decimal, KeyValuePair<Article, int>>(0, (tot, pair));
-            }
+            get => ArticleList.Aggregate<KeyValuePair<Article, int>, decimal>(0, (total, pair) => total += pair.Key.OutputPrice * pair.Value);
         }
 
         public Dictionary<Article, int> ArticleList
