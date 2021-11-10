@@ -20,9 +20,9 @@ namespace POS
             }
         }
 
-        private int _saleTime;
+        private DateTime _saleTime;
 
-        public int SaleTime
+        public DateTime SaleTime
         {
             get => _saleTime;
             set
@@ -34,14 +34,10 @@ namespace POS
 
         public decimal Total
         {
-            get => ArticleList.Aggregate<KeyValuePair<Article, int>, decimal>(0, (total, pair) => total += pair.Key.OutputPrice * pair.Value);
+            get => BillArticleList.Aggregate<KeyValuePair<Article, int>, decimal>(0, (total, pair) => total += pair.Key.OutputPrice * pair.Value);
         }
 
-        public Dictionary<Article, int> ArticleList
-        {
-            get;
-            set;
-        }
+        public Dictionary<Article, int> BillArticleList { get; set; } = new();
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));

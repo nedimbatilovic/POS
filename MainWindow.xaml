@@ -8,12 +8,38 @@
         Title="Point of Sales" Height="460" Width="800">
 
     <TabControl>
-        <TabItem Header="Bill">
+        <TabItem Header="Bill" Name="BillTab">
             <DockPanel>
-                
+				<Border DockPanel.Dock="Left"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                Margin="5">
+					<StackPanel>
+						<Label>Article Index</Label>
+						<TextBox Text="{Binding Path=UIIndex}"></TextBox>
+
+						<Label>Article Quantity</Label>
+						<TextBox Text="{Binding Path=UIQuantity}"></TextBox>
+
+						<Button Click="BArticleAdditon">Add</Button>
+
+						<Button Click="BillPush">Push</Button>
+					</StackPanel>
+				</Border>
+
+				<DataGrid AutoGenerateColumns="False" 
+                  ColumnWidth="*" 
+                  Name="BillDisplay" 
+                  IsReadOnly="True">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Index" Binding="{Binding Path=Key.Index}"></DataGridTextColumn>
+						<DataGridTextColumn Header="Name" Binding="{Binding Path=Key.Name}"></DataGridTextColumn>
+						<DataGridTextColumn Header="Quantity" Binding="{Binding Path=Value}"></DataGridTextColumn>
+					</DataGrid.Columns>
+				</DataGrid>
             </DockPanel>
         </TabItem>
-        <TabItem Header="Articles">
+        <TabItem Header="Articles" Name="ArticlesTab">
             <DockPanel>
                 <Border DockPanel.Dock="Left"
                 BorderBrush="Gray"
@@ -44,7 +70,11 @@
                         <Label Width="220">Output Price w/Tax</Label>
                         <TextBox Width="190" Text="{Binding Path=OutputPriceTax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
-                        <Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
+						<Label Width="220">Quantity</Label>
+						<TextBox Width="190" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+
+						<Button Name="Addition" Margin="10" Click="ArticleAddition">Add Article</Button>
                     </StackPanel>
                 </Border>
 
@@ -61,6 +91,7 @@
                         <DataGridTextColumn Header="Margin" Binding="{Binding Path=Margin}"/>
                         <DataGridTextColumn Header="Tax Rate" Binding="{Binding Path=TaxRate}"/>
                         <DataGridTextColumn Header="Output Price + Tax" Binding="{Binding Path=OutputPriceTax}"/>
+						<DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

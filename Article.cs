@@ -90,6 +90,17 @@ namespace POS
             }
         }
 
+        private int _quantity;
+        public int Quantity
+		{
+            get => _quantity;
+            set
+			{
+                _quantity = value;
+                Change("Quantity");
+			}
+		}
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 
