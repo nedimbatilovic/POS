@@ -60,8 +60,11 @@ namespace POS
             ArticleList.Add(new Article { Index="vodavoda", Name="Voda", EntryPrice=10, Quantity=10});
 
             BillTab.DataContext = this;
-            BillDisplay.ItemsSource = Bill.BillArticleList;
+            BillArticles.ItemsSource = Bill.BillArticleList;
             Bill.BillArticleList.Add(new Article { Index="vodavoda"}, 2); // int is quantity
+
+            BillReviewTab.DataContext = this;
+            BillDisplay.ItemsSource = BillList;
 
             /*File.WriteAllText("test.txt", "stvari");
             string jhg = "hghg" + Environment.NewLine;
@@ -86,15 +89,28 @@ namespace POS
 
             if (art.Quantity >= UIQuantity) 
             {
-                Bill.BillArticleList.Add(art, UIQuantity);
+                art.Quantity -= UIQuantity;
+                int previousQuantity = 0;
+                if (Bill.BillArticleList.ContainsKey(art))
+                {
+                    previousQuantity = Bill.BillArticleList[art];
+                    Bill.BillArticleList.Remove(art);
+
+                }
+
+                Bill.BillArticleList.Add(art, UIQuantity+previousQuantity);
+                BillDisplay.ItemsSource = null;
+                BillDisplay.ItemsSource = Bill.BillArticleList;
             } else
             {
+                // privremeni UI notif
                 MessageBox.Show("Article Quantity Error");
             }
 		}
 
         private void BillPush(object sender, RoutedEventArgs e)
 		{
+
             Bill.BillArticleList.ToList().ForEach(pair => pair.Key.Quantity -= pair.Value);
             BillList.Add(Bill);
 		}

@@ -36,7 +36,11 @@ namespace POS
             get => BillArticleList.Aggregate<KeyValuePair<Article, int>, decimal>(0, (total, pair) => total += pair.Key.OutputPrice * pair.Value);
         }
 
-        public Dictionary<Article, int> BillArticleList { get; set; } = new();
+        public Dictionary<Article, int> BillArticleList 
+        { 
+            get;
+            set; 
+        } = new();
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void Change(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));

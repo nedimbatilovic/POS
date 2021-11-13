@@ -29,7 +29,7 @@
 
 				<DataGrid AutoGenerateColumns="False" 
                   ColumnWidth="*" 
-                  Name="BillDisplay" 
+                  Name="BillArticles" 
                   IsReadOnly="True">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="Index" Binding="{Binding Path=Key.Index}"></DataGridTextColumn>
@@ -39,6 +39,7 @@
 				</DataGrid>
             </DockPanel>
         </TabItem>
+		
         <TabItem Header="Articles" Name="ArticlesTab">
             <DockPanel>
                 <Border DockPanel.Dock="Left"
@@ -96,5 +97,17 @@
                 </DataGrid>
             </DockPanel>
         </TabItem>
+
+		<TabItem Header="Bill Review" Name="BillReviewTab">
+			<DockPanel>
+				<DataGrid ColumnWidth="*"
+                  Name="BillDisplay"
+                  IsReadOnly="True">
+                    
+				</DataGrid>
+
+				<Button>Review</Button>
+			</DockPanel>
+		</TabItem>
     </TabControl>
 </Window>
